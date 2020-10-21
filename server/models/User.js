@@ -18,9 +18,8 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
-  favorites: {
-    type: String,
-  },
+  favorites: [String]
+
   // Mongo auto assigns a Id to the user ?
 });
 
