@@ -15,8 +15,9 @@ db.once('open', async () => {
     const username = faker.internet.userName();
     const email = faker.internet.email(username);
     const password = faker.internet.password();
+    const favorites = [faker.lorem.words(Math.round(Math.random() * 8) + 1)];
     // push into userData array
-    userData.push({ username, email, password });
+    userData.push({ username, email, password,favorites });
   }
   const createdUsers = await User.collection.insertMany(userData);
   //--------------comment data-------------------//
@@ -39,52 +40,7 @@ db.once('open', async () => {
     // push created Comment to createdComments array
     createdComments.push(createdComment);
   }
-  //--------------Recipe data-------------------//
-  for (let i = 0; i < 40; i += 1) {
-    // declare keys
-    const spoonacularId = faker.random.number({ min: 100, max: 999 });
-    const title = faker.company.catchPhrase();
-    const image = faker.image.imageUrl();
-    const description = faker.lorem.paragraphs();
-    const url = faker.internet.url();
-    // relationship with User to push as favorite in User collection later
-    const randomUserIndex = Math.floor(Math.random() * createdUsers.ops.length);
-    const { _id: userId } = createdUsers.ops[randomUserIndex];
-    // relationship with Comment to push as recipeId later
-    const randomCommentIndex = Math.floor(
-      Math.random() * createdComments.length,
-    );
-    const { _id: commentId } = createdComments[randomCommentIndex];
-    // update collections
-    // update User collection
-    await User.updateOne(
-      { _id: userId },
-      {
-        $push: {
-          favoritedRecipes: {
-            spoonacularId,
-            title,
-            image,
-            description,
-            url,
-            username,
-          },
-        },
-      },
-      { runValidators: true },
-    );
-    // update Comment collection
-    await Comment.updateOne(
-      { _id: commentId },
-      {
-        $push: {
-          recipes: { spoonacularId, title, image, description, url, username },
-        },
-      },
-      { runValidators: true },
-    );
-  }
-
+  
   // log after finish
   console.log('seeding all done!');
   process.exit(0);

@@ -22,16 +22,16 @@ type Auth {
   }
 
 type Query {
-    user: User
-    comment: Comment
+    commentByRecipeId(id:String): [Comment]
+    me:User
 }
 
 type Mutation {
     login(email: String!, password: String!): Auth
     addUser(email: String!, password: String!, username: String!): Auth 
-    addComment(commentText: String!, recipeId: String!, user: User)
-    updateComment(commentText: String, recipeId: String, user: User ): Comment
-    deleteComment(commentText: String, recipeId: String, user: User): Comment
+    addComment(commentText: String!, recipeId: String!, user: User):Comment
+    updateComment(commentText: String, recipeId: String, user: User, id:ID ): Comment
+    deleteComment(id:ID): Comment
 }
 
 `;
