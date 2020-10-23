@@ -5,9 +5,10 @@ import ApolloClient from 'apollo-boost';
 
 import Donate from "./pages/Donate";
 import Home from "./pages/Home";
-import Login from "./pages/Login";
+import LoginForm from "./components/LoginForm";
 import NoMatch from "./pages/NoMatch";
 import Profile from "./pages/Profile";
+import SingleRecipe from "./pages/SingleRecipe";
 import Navbar from './components/Navbar';
 
 import { StoreProvider } from "./utils/State";
@@ -34,7 +35,8 @@ function App() {
                         <Navbar />
                         <Switch>
                             <Route exact path='/' component={Home} />
-                            {/* <Route exact path='/login' component={Login} /> */}
+                            <Route exact path='/login' component={LoginForm} />
+                            <Route exact path='recipe/:id' component={SingleRecipe} />
                             {/* <Route exact path='/profile' component={Profile} /> */}
                             {/* <Route exact path='/donate' component={Donate} /> */}
                             {/* <Route component={NoMatch} /> */}
