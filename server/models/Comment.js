@@ -21,8 +21,12 @@ const commentSchema = new Schema({
     default: Date.now,
     get: (timeStamp) => moment(timeStamp).format("MMM DD, YYYY [at] hh:mm a"),
   },
-//User belongs to comment? 
-  user: [User.Schema],
+  username: {
+    type: String,
+    required:true
+  },
 });
+
+const Comment = mongoose.model("Comment", commentSchema);
 
 module.exports = Comment;

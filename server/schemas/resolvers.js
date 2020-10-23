@@ -5,18 +5,17 @@ const stripe = require("stripe")("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
 
 const resolvers = {
   Query: {
-    user: async (parent, args, context) => {
+    me: async (parent, args, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id);
         return user;
       }
+      throw new AuthenticationError('Not logged in');
     },
 
-    comment: async (parent, args, context) => {
-      if (context.Comment) {
-        const comment = await Comment.findById(context.comment._id);
-        return comment;
-      }
+    commentByRecipeId: async (parent, { recipeId }) => {
+      const params = recipeId ? {recipeId} : {};
+      return Comment.find(params).sort({ createdAt: -1 });
     },
   },
 
@@ -24,6 +23,7 @@ const resolvers = {
     addUser: async (parent, args) => {
       const user = await User.create(args);
       const token = signToken(user);
+
       return { token, user };
     },
     //match authentication methods/names with teammeates...signToken
@@ -45,18 +45,36 @@ const resolvers = {
       return { token, user };
     },
 
-    addComment: async (parent, args) => {
-      const comment = await Comment.create(args);
-      return comment;
+    addComment: async (parent, args, context) => {
+      if (context.user) {
+        const comment = await Comment.create({ ...args, username: context.user.username });
+        return comment;
+      }
     },
 
-    updateComment: async (parent, {_id}) => {
-        return await Comment.findByIdAndUpdate(_id);
+    updateComment: async (parent, { commentId }) => {
+      const updatedComment = await Comment.findByIdAndUpdate(commentId);
+      return updatedComment;
     },
 
-    deleteComment: async (parent, {_id}) => {
-        return await Comment.findByIdAndDelete(_id);
-    }
+    deleteComment: async (parent, { commentId }) => {
+      return await Comment.findByIdAndDelete(commentId);
+    },
+
+    addFavorites: async (parent,{recipeId},context)=>{
+      return await User.findByIdAndUpdate(
+        {_id:context.user._id},
+        {$push:{favorites:recipeId}},
+        {new: true}
+        )
+    },
+    removeFavorites: async (parent,{recipeId},context)=>{
+      return await User.findByIdAndUpdate(
+        {_id:context.user._id},
+        {$pull:{favorites:recipeId}},
+        {new: true}
+        )
+    },
   },
 };
 
