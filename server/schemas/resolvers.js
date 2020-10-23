@@ -13,8 +13,9 @@ const resolvers = {
       throw new AuthenticationError('Not logged in');
     },
 
-    commentByRecipeId: async (parent, { id }) => {
-      return Comment.find({ id }).sort({ createdAt: -1 });
+    commentByRecipeId: async (parent, { recipeId }) => {
+      const params = recipeId ? {recipeId} : {};
+      return Comment.find(params).sort({ createdAt: -1 });
     },
   },
 
@@ -22,6 +23,7 @@ const resolvers = {
     addUser: async (parent, args) => {
       const user = await User.create(args);
       const token = signToken(user);
+
       return { token, user };
     },
     //match authentication methods/names with teammeates...signToken
@@ -50,13 +52,29 @@ const resolvers = {
       }
     },
 
-    updateComment: async (parent, { _id }) => {
-      return await Comment.findByIdAndUpdate(_id);
+    updateComment: async (parent, { commentId }) => {
+      const updatedComment = await Comment.findByIdAndUpdate(commentId);
+      return updatedComment;
     },
 
-    deleteComment: async (parent, { _id }) => {
-      return await Comment.findByIdAndDelete(_id);
-    }
+    deleteComment: async (parent, { commentId }) => {
+      return await Comment.findByIdAndDelete(commentId);
+    },
+
+    addFavorites: async (parent,{recipeId},context)=>{
+      return await User.findByIdAndUpdate(
+        {_id:context.user._id},
+        {$push:{favorites:recipeId}},
+        {new: true}
+        )
+    },
+    removeFavorites: async (parent,{recipeId},context)=>{
+      return await User.findByIdAndUpdate(
+        {_id:context.user._id},
+        {$pull:{favorites:recipeId}},
+        {new: true}
+        )
+    },
   },
 };
 
