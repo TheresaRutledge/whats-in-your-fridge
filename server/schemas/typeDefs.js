@@ -13,7 +13,7 @@ type Comment {
     commentText: String!
     recipeId: String
     createdAt: String
-    user: User
+    username: String
   }
 
 type Auth {
@@ -29,8 +29,8 @@ type Query {
 type Mutation {
     login(email: String!, password: String!): Auth
     addUser(email: String!, password: String!, username: String!): Auth 
-    addComment(commentText: String!, recipeId: String!, user: User):Comment
-    updateComment(commentText: String, recipeId: String, user: User, id:ID ): Comment
+    addComment(commentText: String!, recipeId: String!, username: String!):Comment
+    updateComment(commentText: String, id:ID ): Comment
     deleteComment(id:ID): Comment
 }
 
