@@ -12,3 +12,5 @@ mutation login($email:String!, $password: String!) {
 }
 
 `;
+
+export const ADD_
