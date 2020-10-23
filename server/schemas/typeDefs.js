@@ -30,7 +30,7 @@ type Query {
 type Mutation {
     login(email: String!, password: String!): Auth
     addUser(email: String!, password: String!, username: String!): Auth 
-    addComment(commentText: String!, recipeId: String!, username: String!):Comment
+    addComment(commentText: String!, recipeId: String!):Comment
     updateComment(commentText: String, commentId:ID ): Comment
     deleteComment(commentId:ID): Comment
     addFavorites(recipeId:String!):User

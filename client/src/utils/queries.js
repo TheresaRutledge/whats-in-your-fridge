@@ -5,25 +5,19 @@ export const QUERY_USER = gql `
 {
     me {
         userName
-        email
         favorites
     }
 }
 
 `;
 
-export const QUERY_COMMENT = gql `
-{
-    comment {
-        commentText
-        recipeId
-        createAt
-        user {
-            User
-        }
+export const QUERY_COMMENTS = gql `
+query commentByRecipeId($recipeId:String){
+    commentByRecipeId(recipeId:$recipeId){
+      commentText
+      username
+      recipeId
     }
-}
+  }
 `
-// query getComment(id:String) {
-// //     commentbyRecipeId(comment:$comment)
-// // }
+
