@@ -7,6 +7,7 @@ mutation login($email: String!, $password: String!) {
         token
         user {
             _id
+            username
         }
     }
 }
@@ -28,7 +29,7 @@ mutation addUser($email: String!, $password: String!, $username: String!){
 export const ADD_COMMENT = gql `
 mutation addComment($commentText: Strinq!, recipeId: String!) {
     addComment(commentText: $commentText) {
-        
+
     }
 }
 
