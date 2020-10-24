@@ -1,16 +1,10 @@
-//BUG - this page isn't rendered when the path is followed
+
 import React,{useEffect} from 'react';
 import { useParams } from 'react-router-dom';
 import { UPDATE_CURRENT_RECIPE } from '../utils/actions';
 import { getSingleRecipe } from '../utils/helpers';
 import { useStoreContext } from '../utils/State';
 
-// const { id } = useParams;
-// const getRecipe = async () => {
-//       await getSingleRecipe(716429);
-// }
-// const recipe = getRecipe();
-// console.log(recipe);
 
 const SingleRecipe = () => {
     const [state, dispatch] = useStoreContext();

@@ -4,13 +4,13 @@ import { useReducer } from 'react';
 import {
     UPDATE_RECIPES,
     UPDATE_INGREDIENTS,
-    UPDATE_CURRENT_RECIPE
+    UPDATE_CURRENT_RECIPE,
+    UPDATE_FAVORITE_RECIPES
 } from "./actions";
 
 export const reducer = (state, action) => {
     switch (action.type) {
         case UPDATE_RECIPES:
-            console.log(`updating recipes. action is ${action.recipes}`)
             return {
                 ...state,
                recipes:[...action.recipes]
@@ -25,8 +25,13 @@ export const reducer = (state, action) => {
                 return {
                     ...state,
                     currentRecipe:action.currentRecipe
-                }
-      
+                };
+                case UPDATE_FAVORITE_RECIPES:
+                    return {
+                        ...state,
+                        favoriteRecipes:action.favoriteRecipes
+                    }
+
         default:
             return state;
     }
