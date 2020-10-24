@@ -3,7 +3,8 @@ import { useReducer } from 'react';
 
 import {
     UPDATE_RECIPES,
-    UPDATE_INGREDIENTS
+    UPDATE_INGREDIENTS,
+    UPDATE_CURRENT_RECIPE
 } from "./actions";
 
 export const reducer = (state, action) => {
@@ -20,6 +21,11 @@ export const reducer = (state, action) => {
                 ...state,
                 ingredients:action.ingredients
             };
+            case UPDATE_CURRENT_RECIPE:
+                return {
+                    ...state,
+                    currentRecipe:action.currentRecipe
+                }
       
         default:
             return state;

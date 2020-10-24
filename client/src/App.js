@@ -36,7 +36,7 @@ function App() {
                         <Switch>
                             <Route exact path='/' component={Home} />
                             <Route exact path='/login' component={LoginForm} />
-                            <Route exact path='recipe/:id' component={SingleRecipe} />
+                            <Route exact path='/recipe/:id' component={SingleRecipe} />
                             {/* <Route exact path='/profile' component={Profile} /> */}
                             {/* <Route exact path='/donate' component={Donate} /> */}
                             {/* <Route component={NoMatch} /> */}
