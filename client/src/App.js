@@ -39,7 +39,7 @@ function App() {
                             <Route exact path='recipe/:id' component={SingleRecipe} />
                             {/* <Route exact path='/profile' component={Profile} /> */}
                             {/* <Route exact path='/donate' component={Donate} /> */}
-                            {/* <Route component={NoMatch} /> */}
+                            <Route component={NoMatch} />
                         </Switch>
                     </StoreProvider>
                 </div>
