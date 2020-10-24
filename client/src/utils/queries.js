@@ -17,6 +17,8 @@ query commentByRecipeId($recipeId:String){
       commentText
       username
       recipeId
+      createdAt
+      _id
     }
   }
 `
