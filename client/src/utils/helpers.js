@@ -34,19 +34,17 @@ export const getSingleRecipe = async (id) => {
 
 //gets passed array of recipe IDs
 //haven't tested if this will work
-//change to use get recipes in bulk!
 export const getFavorites = async (recipeIds) => {
-    let favoriteRecipes = [];
+    const recipeIdString = recipeIds.join(',');
 
-    for (let i = 0; i < recipeIds; i++) {
-        favoriteRecipes.push(await fetch(`https://api.spoonacular.com/recipes/${recipeIds[i]}/information?includeNutrition=false&apiKey=${apiKey}`)
-            .then(response => {
-                return response.json();
-            })
-            .catch(err => console.log(err))
-        )
-    }
-
+    return await fetch(`https://api.spoonacular.com/recipes/informationBulk?ids=${recipeIdString}&includeNutrition=false&apiKey=${apiKey}`)
+        .then(response => {
+            return response.json();
+        })
+        .then(data => {
+            return data
+        })
+        .catch(err => console.log(err));
 }
 
 
