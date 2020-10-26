@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import Auth from '../../utils/auth';
+import 'bootstrap/dist/css/bootstrap.css';
 import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
 import SignUpForm from '../SignupForm';
 import LoginForm from '../LoginForm';
+
 
 const AppNavbar = () => {
   // set modal display state
