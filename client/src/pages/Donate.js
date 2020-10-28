@@ -1,4 +1,10 @@
 import React, { useState } from 'react';
+import { CardElement, Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+
+// Make sure to call `loadStripe` outside of a component’s render to avoid
+// recreating the `Stripe` object on every render.
+const stripePromise = loadStripe('pk_test_JJ1eMdKN0Hp4UFJ6kWXWO4ix00jtXzq5XG');
 
 const Donate = () => {
   const [donateionAmount, setDonationAmount] = useState();
@@ -39,13 +45,27 @@ const Donate = () => {
             id="cardholder-name"
             type="text"
             name="cardholder-name"
-            value="{{name}}"
+            // value="{{name}}"
           ></input>
         </div>
-        <div>
-          <label for="card-element">Credit or debit card:</label>
-          <div id="card-element"></div>
-        </div>
+        <Elements stripe={stripePromise}>
+          <CardElement
+            options={{
+              style: {
+                base: {
+                  fontSize: '16px',
+                  color: '#424770',
+                  '::placeholder': {
+                    color: '#aab7c4',
+                  },
+                },
+                invalid: {
+                  color: '#9e2146',
+                },
+              },
+            }}
+          />
+        </Elements>
         <div id="card-errors"></div>
         <div>
           <button id="card-button" data-secret="{{intentSecret}}">
