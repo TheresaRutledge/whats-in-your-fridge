@@ -1,6 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const Donate = () => {
+  const [donateionAmount, setDonationAmount] = useState();
+  const handleChange = (event) => {
+    if (event.target.value) {
+      setDonationAmount(event.target.value);
+    }
+  };
+
   return (
     <div>
       <h1>Donate</h1>
@@ -16,10 +23,34 @@ const Donate = () => {
         </div>
         <div>
           <label for="amount">Amount: </label>
-          <input id="amount" type="number" name="amount" min="10"></input>
+          <input
+            id="amount"
+            type="number"
+            name="amount"
+            min="10"
+            onChange={handleChange}
+          ></input>
+        </div>
+      </form>
+      <form method="POST" action="/donate/thanks" id="card">
+        <div>
+          <label for="cardholder-name">Cardholder name: </label>
+          <input
+            id="cardholder-name"
+            type="text"
+            name="cardholder-name"
+            value="{{name}}"
+          ></input>
         </div>
         <div>
-          <button type="submit">Next</button>
+          <label for="card-element">Credit or debit card:</label>
+          <div id="card-element"></div>
+        </div>
+        <div id="card-errors"></div>
+        <div>
+          <button id="card-button" data-secret="{{intentSecret}}">
+            {donateionAmount ? `Donate $${donateionAmount} USD` : `Donate`}
+          </button>
         </div>
       </form>
     </div>

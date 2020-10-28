@@ -11,7 +11,7 @@
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
     "mongoose": "^5.10.9",
-    "stripe": "^8.114.0"
+    "stripe": "^8.119.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.6",
@@ -21,7 +21,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "watch": "nodemon",
-    "seed": "node seeders/seeds.js"
+    "seed": "node seeders/seeds.js",
+    "stripe": "node utils/stripe.js"
   },
   "keywords": [],
   "author": "",
