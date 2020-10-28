@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Auth from '../../utils/auth';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -6,14 +6,13 @@ import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
 import SignUpForm from '../SignupForm';
 import LoginForm from '../LoginForm';
 
-
 const AppNavbar = () => {
   // set modal display state
   const [showModal, setShowModal] = useState(false);
 
   return (
     <>
-      <Navbar bg="light" variant="light" expand="lg" >
+      <Navbar bg="light" variant="light" expand="lg">
         <Container fluid>
           <Navbar.Brand as={Link} to="/" className="title">
             What's in your fridge?
@@ -24,6 +23,9 @@ const AppNavbar = () => {
               <Nav.Link as={Link} to="/" className="donate">
                 Don't let your food go to waste!
               </Nav.Link>
+              <Nav.Link as={Link} to="/donate" className="donate">
+                Donation
+              </Nav.Link>
               {/* if user is logged in show saved books and logout */}
               {Auth.loggedIn() ? (
                 <>
@@ -33,7 +35,10 @@ const AppNavbar = () => {
                   <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
                 </>
               ) : (
-                <Nav.Link onClick={() => setShowModal(true)} className="login-signup">
+                <Nav.Link
+                  onClick={() => setShowModal(true)}
+                  className="login-signup"
+                >
                   Login/Sign Up
                 </Nav.Link>
               )}
