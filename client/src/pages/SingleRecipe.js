@@ -12,10 +12,7 @@ import { useQuery } from "@apollo/react-hooks";
 const SingleRecipe = () => {
     const [state, dispatch] = useStoreContext();
     // const ingredients = state.currentRecipe.extendedIngredients;
-    console.log(
-        "state",
-        state
-    )
+
     const { id } = useParams();
     const { loading, data } = useQuery(QUERY_COMMENTS, {
         variables: { recipeId: id }
@@ -27,7 +24,6 @@ const SingleRecipe = () => {
             const recipe = await getSingleRecipe(id)
                 .catch(err => console.log('ERROR',err));
             if(!recipe.code && state.currentRecipe.extendedIngredients.length===0 ) {
-                console.log('I have a recipe')
                 dispatch({
                     type: UPDATE_CURRENT_RECIPE,
                     currentRecipe: recipe
@@ -38,7 +34,7 @@ const SingleRecipe = () => {
         // const ingredients = state.currentRecipe.extendedIngredients;
         // console.log(ingredients);
         fetchRecipe();
-    }, [state.currentRecipe.extendedIngredients])
+    }, [state.currentRecipe.extendedIngredients,data,dispatch,id])
 
     //why does this show an array in console but comes up as undef?
 

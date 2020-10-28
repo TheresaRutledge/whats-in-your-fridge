@@ -26,7 +26,7 @@ const Search = () => {
         .then(recipes => {
             dispatch({
                 type:UPDATE_RECIPES,
-                recipes:recipes 
+                recipes:recipes
             });
             
         }).then(data=>{
