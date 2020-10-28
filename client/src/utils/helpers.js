@@ -1,5 +1,5 @@
 // Spoonacular API calls
-const apiKey = '5bb17ff8de4a4ac48777208734e43797';
+const apiKey = '1f797f5c46144fd9bfd9c86fe88bf23c';
 
 
 // gets passed array of ingredients

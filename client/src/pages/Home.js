@@ -9,8 +9,8 @@ const Home = () => {
 
   return (
     <div className="card bg-dark text-black">
-      <img src={coverImage} class="card-img" alt="..."></img>
-      <div class="card-img-overlay">
+      <img src={coverImage} className="card-img" alt="..."></img>
+      <div className="card-img-overlay">
         <Search />
         {state.recipes.map((recipe) => (
           <Recipes key={recipe.id} recipe={recipe} />

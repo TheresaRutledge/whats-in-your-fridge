@@ -7,9 +7,11 @@ const {Provider} = StoreContext;
 
 const StoreProvider = (props) => {
     const [state,dispatch] = useRecipeReducer({
-        ingredients:[],
+        ingredients:[],//not used
         recipes:[],//recipes that were searched for
-        currentRecipe:[],
+        currentRecipe:{
+            extendedIngredients:[]
+        },
         favoriteRecipes:[]
     });
     return <Provider value={[state,dispatch]} {...props} />

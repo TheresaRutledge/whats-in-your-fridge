@@ -1,61 +1,74 @@
 
-import React,{useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { UPDATE_CURRENT_RECIPE } from '../utils/actions';
 import { getSingleRecipe } from '../utils/helpers';
 import { useStoreContext } from '../utils/State';
 import Comment from "../components/Comment";
 import CommentForm from "../components/CommentForm";
-import {QUERY_COMMENTS} from "../utils/queries";
-import {useQuery} from "@apollo/react-hooks";
+import { QUERY_COMMENTS } from "../utils/queries";
+import { useQuery } from "@apollo/react-hooks";
 
 const SingleRecipe = () => {
     const [state, dispatch] = useStoreContext();
+    // const ingredients = state.currentRecipe.extendedIngredients;
+    console.log(
+        "state",
+        state
+    )
     const { id } = useParams();
-    const {loading, data} = useQuery(QUERY_COMMENTS,{
-        variables:{recipeId:id}
+    const { loading, data } = useQuery(QUERY_COMMENTS, {
+        variables: { recipeId: id }
     });
     const comments = data ? data.commentByRecipeId : [];
 
-
-    useEffect( async () => {
-        await getSingleRecipe(id)
-            .then(recipe => {
+    useEffect(() => {
+        async function fetchRecipe() {
+            const recipe = await getSingleRecipe(id)
+                .catch(err => console.log('ERROR',err));
+            if(!recipe.code && state.currentRecipe.extendedIngredients.length===0 ) {
+                console.log('I have a recipe')
                 dispatch({
                     type: UPDATE_CURRENT_RECIPE,
                     currentRecipe: recipe
                 })
-            })
-    },[id])
+            }
+        }
+        // setIngredients(recipe?.extendedIngredients || []);
+        // const ingredients = state.currentRecipe.extendedIngredients;
+        // console.log(ingredients);
+        fetchRecipe();
+    }, [state.currentRecipe.extendedIngredients])
 
-    const ingredients = state.currentRecipe.extendedIngredients;//why does this show an array in console but comes up as undef?
-    // console.log(ingredients);
-// const ingredients = state.currentRecipe.extendedIngredients.map(item => {
-//     return item.name
-// })
+    //why does this show an array in console but comes up as undef?
+
+    // const ingredients = state.currentRecipe.extendedIngredients.map(item => {
+    //     return item.name
+    // })
+// console.log("currentRecipe:", state.currentRecipe);
 
     return (
         <div>
             <h1>{state.currentRecipe.title}</h1>
             <img src={state.currentRecipe.image} />
-            <h3>Ingredients</h3>
-            {/* <ul>
-                {ingredients.forEach(item => {
-                    return <li>{item}</li>
-                   
+            <h3>Ingredients:</h3>
+            <ul>
+                {state.currentRecipe.extendedIngredients.map(item => {
+                    return <li key={item.id}>{item.name}</li>
+
                 })}
-            </ul> */}
+            </ul>
             <h3>Directions:</h3>
             <p>{state.currentRecipe.instructions}</p>
             <CommentForm></CommentForm>
-            {comments.map(comment=> {
-                return <Comment 
-                key={comment._id}
-                commentText={comment.commentText}
-                username={comment.username}
-                createdAt={comment.createdAt}
+            {comments.map(comment => {
+                return <Comment
+                    key={comment._id}
+                    commentText={comment.commentText}
+                    username={comment.username}
+                    createdAt={comment.createdAt}
                 ></Comment>
-            })} 
+            })}
         </div>
 
 
