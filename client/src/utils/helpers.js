@@ -1,5 +1,5 @@
 // Spoonacular API calls
-const apiKey = '1f797f5c46144fd9bfd9c86fe88bf23c';
+const apiKey = 'e2883964056f41ee8ac8426ae17c850b';
 
 
 // gets passed array of ingredients
@@ -33,18 +33,32 @@ export const getSingleRecipe = async (id) => {
 }
 
 //gets passed array of recipe IDs
-//haven't tested if this will work
 export const getFavorites = async (recipeIds) => {
-    const recipeIdString = recipeIds.join(',');
+    let recipeIdString;
+    if (recipeIds.length === 1) {
+        recipeIdString = recipeIds[0]
+    }
+    else if (recipeIds.length === 0) {
+        return false;
+    } else {
+        recipeIdString = recipeIds.join(',');
+    }
 
+    // return {
+    //     "id": 553847,
+    //     "title":"test recipe"
+    // }
+
+  
     return await fetch(`https://api.spoonacular.com/recipes/informationBulk?ids=${recipeIdString}&includeNutrition=false&apiKey=${apiKey}`)
-        .then(response => {
+    .then(response => {
             return response.json();
         })
         .then(data => {
             return data
         })
         .catch(err => console.log(err));
+
 }
 
 
