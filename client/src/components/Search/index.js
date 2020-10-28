@@ -42,10 +42,10 @@ const Search = () => {
             <form id='group-form' onSubmit={handleFormSubmit}>
                 <div id='groups'>
                     <div>
-                        <h3>Search for recipes based on whats in your fridge!</h3>
+                        <h3 className="title">Search for recipes based on whats in your fridge!</h3>
                         <label htmlFor="group-1">Ingredients:</label>
                         <input type="text" className="form-control mb-2 mr-sm-2" id="group-1" onChange={handleChange} />
-                        <button
+                        <button className="search-button"
                             type='submit'
                         >Find Recipes!</button>
                     </div>
