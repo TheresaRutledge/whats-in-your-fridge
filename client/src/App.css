@@ -7,6 +7,12 @@
   pointer-events: none;
 }
 
+/* .fridge {
+
+  background-image: url("./assets/images/food-fridge.jpg");
+  background-size: 50%; 
+} */
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

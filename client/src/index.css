@@ -11,3 +11,52 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.login-signup {
+  transition-duration: 0.4s;
+  border-radius: 25px;
+}
+
+.login-signup:hover {
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
+/* .title {
+  display: flex;
+  justify-content: center;
+} */
+.donate {
+  transition-duration: 0.4s;
+  border-radius: 25px;
+}
+
+.donate:hover {
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
+.search-button {
+  transition-duration: 0.4s;
+}
+
+.search-button:hover {
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
+/* .search-button {
+
+} */
+
+/* .search-title {
+  color: 
+} */
+/* .fridge {
+
+  background-image: url("./assets/images/food-fridge.jpg");
+  background-size: 50%; 
+} */
+
+
+/* .container {
+
+  background-color: aqua; 
+} */
+
