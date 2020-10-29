@@ -10,11 +10,9 @@ import NoMatch from './pages/NoMatch';
 import Profile from './pages/Profile';
 import SingleRecipe from './pages/SingleRecipe';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
 import { StoreProvider } from './utils/State';
-// recreating the `Stripe` object on every render.
-const stripeKey =
-  'pk_test_51HhCS7GO36rYcXmbjchTWLEOjxcgzEepOk8QhKuPZ0Oyx4X3uH4yXdYj5jpGSKQ1hUkb6yyzTOGTk8Mqmzpp7k7S00ouymSUty';
 
 const client = new ApolloClient({
   request: (operation) => {
@@ -43,6 +41,7 @@ function App() {
               <Route exact path="/donate" component={Donate} />
               <Route component={NoMatch} />
             </Switch>
+            <Footer />
           </StoreProvider>
         </div>
       </Router>
