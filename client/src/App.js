@@ -12,6 +12,9 @@ import SingleRecipe from './pages/SingleRecipe';
 import Navbar from './components/Navbar';
 
 import { StoreProvider } from './utils/State';
+// recreating the `Stripe` object on every render.
+const stripeKey =
+  'pk_test_51HhCS7GO36rYcXmbjchTWLEOjxcgzEepOk8QhKuPZ0Oyx4X3uH4yXdYj5jpGSKQ1hUkb6yyzTOGTk8Mqmzpp7k7S00ouymSUty';
 
 const client = new ApolloClient({
   request: (operation) => {
