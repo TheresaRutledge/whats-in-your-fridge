@@ -8,6 +8,7 @@ import Comment from "../components/Comment";
 import CommentForm from "../components/CommentForm";
 import { QUERY_COMMENTS } from "../utils/queries";
 import { useQuery } from "@apollo/react-hooks";
+import Auth from "../utils/auth";
 
 const SingleRecipe = () => {
     const [state, dispatch] = useStoreContext();
@@ -56,7 +57,9 @@ const SingleRecipe = () => {
             </ul>
             <h3>Directions:</h3>
             <p>{state.currentRecipe.instructions}</p>
+            {Auth.loggedIn() ?
             <CommentForm></CommentForm>
+            : "Login to leave a comment" }
             {comments.map(comment => {
                 return <Comment
                     key={comment._id}

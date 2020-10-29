@@ -10,7 +10,7 @@ import Recipes from "../components/Recipes";
 const Profile = () => {
 
     const [state, dispatch] = useStoreContext();
-    const { loading, data } = useQuery(QUERY_USER);
+    const { loading, data } = useQuery(QUERY_USER,);
     const recipeIds = data ? data.me.favorites : "";
     
 
