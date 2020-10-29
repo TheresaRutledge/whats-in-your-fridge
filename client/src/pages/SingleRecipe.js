@@ -70,14 +70,14 @@ const SingleRecipe = () => {
         <h5>Directions:</h5>
         <p>{state.currentRecipe.instructions}</p>
       </Row>
-      <Row className=" mx-3">
+     
         {Auth.loggedIn() ? (
           <CommentForm></CommentForm>
         ) : (
           <p className="font-italic text-muted">Login to leave a comment</p>
         )}
-      </Row>
-      <Row>
+
+ 
         {comments.map((comment) => {
           return (
             <Comment
@@ -88,7 +88,7 @@ const SingleRecipe = () => {
             ></Comment>
           );
         })}
-      </Row>
+    
     </div>
   );
 };

@@ -34,19 +34,19 @@ const CommentForm = () => {
     }
 
     return (
-        <div>
+        <div classname="w-75">
             <p className={`m-0 ${characterCount === maxChar ? 'text-error' : ''}`}>
                 Character Count: {characterCount}/{maxChar}
                 {error && <span className="ml-2">Something went wrong...</span>}
             </p>
-            <form className="flex-row justify-center justify-space-between-md align-stretch" onSubmit={handleFormSubmit}>
+            <form className=" justify-center justify-space-between-md align-stretch w-50" onSubmit={handleFormSubmit}>
                 <textarea
                     placeholder="My comment..."
                     value={commentText}
-                    className="form-input col-12 col-md-9"
+                    className="form-control mb-2"
                     onChange={handleChange}
                 ></textarea>
-                <button className="btn col-12 col-md-3" type="submit">
+                <button className="btn-danger mb-2" type="submit">
                     Add Comment
         </button>
             </form>
