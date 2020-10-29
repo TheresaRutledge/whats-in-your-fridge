@@ -33,7 +33,7 @@ function App() {
         <div className="fridge">
           <StoreProvider>
             <Navbar />
-            <Switch>
+            <Switch min-height="1000px">
               <Route exact path="/" component={Home} />
               <Route exact path="/login" component={LoginForm} />
               <Route exact path="/recipe/:id" component={SingleRecipe} />
