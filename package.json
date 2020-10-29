@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/TheresaRutledge/whats-in-your-fridge#readme",
   "dependencies": {
+    "react-reveal": "^1.2.2"
     "axios": "^0.21.0",
     "if-env": "^1.0.4",
     "react-stripe-checkout": "^2.6.3"
