@@ -1,78 +1,78 @@
 import React, { useState } from 'react';
-import { CardElement, Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
+import StripeCheckout from 'react-stripe-checkout';
+import axios from 'axios';
+import { Button } from 'react-bootstrap';
+import coverImage from '../assets/images/food-fridge.jpg';
+import { toast } from 'react-toastify';
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
-const stripePromise = loadStripe('pk_test_JJ1eMdKN0Hp4UFJ6kWXWO4ix00jtXzq5XG');
+const stripeKey =
+  'pk_test_51HhCS7GO36rYcXmbjchTWLEOjxcgzEepOk8QhKuPZ0Oyx4X3uH4yXdYj5jpGSKQ1hUkb6yyzTOGTk8Mqmzpp7k7S00ouymSUty';
+
+toast.configure();
 
 const Donate = () => {
-  const [donateionAmount, setDonationAmount] = useState();
-  const handleChange = (event) => {
-    if (event.target.value) {
-      setDonationAmount(event.target.value);
-    }
+  // amount to donate
+  const [donation] = React.useState({
+    name: 'SF Marin Food Bank',
+    amount: 20.0,
+  });
+  // this one work
+  // const handleToken = async (token, addresses) => {
+  //   console.log({ token, addresses });
+  // };
+
+  // this one do not work
+  const handleToken = async (token, addresses) => {
+    const response = await axios
+      .post('http://localhost:3000/StripeDonate', {
+        token,
+        donation,
+      })
+      .catch((err) => {
+        if (err) {
+          console.log(err);
+        }
+      });
+    // const { status } = response.data;
+    // console.log('Response:', response.data);
+    // if (status === 'success') {
+    //   toast('Success! Check email for details', { type: 'success' });
+    //   console.log(status);
+    // } else {
+    //   toast('Something went wrong', { type: 'error' });
+    // }
+    console.log(response);
   };
 
   return (
-    <div>
-      <h1>Donate</h1>
-      <p>Thank you for donating!</p>
-      <form method="POST" action="">
+    <div className="card bg-dark text-black">
+      <img src={coverImage} className="card-img" alt="..."></img>
+      <div className="card-img-overlay">
         <div>
-          <label for="name">Name: </label>
-          <input id="name" type="text" name="name"></input>
+          <h5>Thank you for donating!</h5>
+          <p>
+            Have a lasting impact. Your donation helps the SF Marin Food Bank to
+            provide and distribute food to homeless people.
+          </p>
+          <p>
+            Your $20 donation can help us buy 80 pounds of nutrient-packed
+            produce, like fresh broccoli. 80 pounds of rice or dried beans: One
+            of the most economic ways we can stretch $20 is by buying bulk dried
+            beans and grains and then bagging them up into smaller portions.
+          </p>
         </div>
-        <div>
-          <label for="email">Email address: </label>
-          <input id="email" type="email" name="email"></input>
-        </div>
-        <div>
-          <label for="amount">Amount: </label>
-          <input
-            id="amount"
-            type="number"
-            name="amount"
-            min="10"
-            onChange={handleChange}
-          ></input>
-        </div>
-      </form>
-      <form method="POST" action="/donate/thanks" id="card">
-        <div>
-          <label for="cardholder-name">Cardholder name: </label>
-          <input
-            id="cardholder-name"
-            type="text"
-            name="cardholder-name"
-            // value="{{name}}"
-          ></input>
-        </div>
-        <Elements stripe={stripePromise}>
-          <CardElement
-            options={{
-              style: {
-                base: {
-                  fontSize: '16px',
-                  color: '#424770',
-                  '::placeholder': {
-                    color: '#aab7c4',
-                  },
-                },
-                invalid: {
-                  color: '#9e2146',
-                },
-              },
-            }}
-          />
-        </Elements>
-        <div id="card-errors"></div>
-        <div>
-          <button id="card-button" data-secret="{{intentSecret}}">
-            {donateionAmount ? `Donate $${donateionAmount} USD` : `Donate`}
-          </button>
-        </div>
-      </form>
+        <StripeCheckout
+          stripeKey={stripeKey}
+          token={handleToken}
+          billingAddress
+          amount={donation.amount * 100}
+          name={donation.name}
+        >
+          <Button className="donate">Donate</Button>
+        </StripeCheckout>
+      </div>
     </div>
   );
 };
