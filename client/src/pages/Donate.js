@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import StripeCheckout from 'react-stripe-checkout';
 import axios from 'axios';
 import { Button } from 'react-bootstrap';
-import coverImage from '../assets/images/food-fridge.jpg';
 import { toast } from 'react-toastify';
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
@@ -48,7 +47,6 @@ const Donate = () => {
 
   return (
     <div className="card bg-dark text-black">
-      <img src={coverImage} className="card-img" alt="..."></img>
       <div className="card-img-overlay">
         <div>
           <h5>Thank you for donating!</h5>
@@ -70,7 +68,7 @@ const Donate = () => {
           amount={donation.amount * 100}
           name={donation.name}
         >
-          <Button className="donate">Donate</Button>
+          <Button className="donate btn btn-success">Donate</Button>
         </StripeCheckout>
       </div>
     </div>
