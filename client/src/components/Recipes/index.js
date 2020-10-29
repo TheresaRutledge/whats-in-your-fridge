@@ -13,22 +13,40 @@ const Recipes = ({recipe}) => {
             return " " + item.name
         });
     }
+  
 
-    const [addFavorites] = useMutation(ADD_FAVORITE);
-    const [removeFavorites] = useMutation(REMOVE_FAVORITES);
+    const [addFavorites] = useMutation(ADD_FAVORITE,{
+        update(cache,{data:{addFavorites}}){
+            const {me} = cache.readQuery({query:QUERY_USER});
+            cache.writeQuery({
+                query:QUERY_USER,
+                data:{me:{...me, favorites: [...me.favorites, addFavorites]}}
+            })
+        }
+    });
+
+    const [removeFavorites] = useMutation(REMOVE_FAVORITES,{
+        update(cache,{data:{removeFavorites}}){
+            const {me} = cache.readQuery({query:QUERY_USER});
+            cache.writeQuery({
+                query:QUERY_USER,
+                data:{me:{...me, favorites: [...me.favorites, removeFavorites]}}
+            })
+        }
+    });
 
     const { loading, data } = useQuery(QUERY_USER)
     const favorites = data ? data.me.favorites : "";
+
 
     let checkIfFavorite = () => {
         for (let i = 0; i < favorites.length; i++) {
             if (favorites[i] === recipe.id.toString()) {
                 return true;
             }
-            return false
         }
+        return false;
     }
-
     let isFavorite = checkIfFavorite();
   
 
@@ -38,17 +56,22 @@ const Recipes = ({recipe}) => {
 
     const updateFavorite = () => {
         if (isFavorite) {
+            console.log('removing ',recipe.id.toString())
             removeFavorites({
                 variables: { recipeId: recipe.id.toString() }
-            })
+            });
+     
         }
         if (!isFavorite) {
+            console.log('adding ',recipe.id.toString())
             addFavorites({
                 variables: { recipeId: recipe.id.toString() }
             });
         }
         toggleFavorite();
     }
+
+
 
     return (
         <div>
