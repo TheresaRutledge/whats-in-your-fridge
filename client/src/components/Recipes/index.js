@@ -5,7 +5,8 @@ import { QUERY_USER } from '../../utils/queries';
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import Auth from "../../utils/auth";
 import Profile from '../../pages/Profile';
-
+import 'bootstrap/dist/css/bootstrap.css';
+import Card from 'react-bootstrap/Card';
 
 const Recipes = ({recipe}) => {
     let missingIngredients;
@@ -75,7 +76,7 @@ const Recipes = ({recipe}) => {
 
 
     return (
-        <div>
+        <Card style={{width: '19rem' }}>
             <Link to={`/recipe/${recipe.id}`}>
                 <img src={recipe.image} className="card-img-top" alt="..." />
             </Link>
@@ -90,7 +91,7 @@ const Recipes = ({recipe}) => {
                 </button>
                 : ""}
             </div>
-        </div>
+        </Card>
     )
 };
 
