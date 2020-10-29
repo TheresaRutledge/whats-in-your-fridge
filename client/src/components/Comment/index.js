@@ -1,4 +1,4 @@
-//needs to be passed a recipeId and get all corresponding comments to return sorted by date
+//passed a recipeId and get all corresponding comments to return sorted by date
 
 import React, { useEffect } from 'react';
 

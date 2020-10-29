@@ -12,7 +12,6 @@ import { Row, Col } from 'react-bootstrap';
 
 const SingleRecipe = () => {
   const [state, dispatch] = useStoreContext();
-  // const ingredients = state.currentRecipe.extendedIngredients;
 
   const { id } = useParams();
   const { loading, data } = useQuery(QUERY_COMMENTS, {
@@ -35,18 +34,9 @@ const SingleRecipe = () => {
         });
       }
     }
-    // setIngredients(recipe?.extendedIngredients || []);
-    // const ingredients = state.currentRecipe.extendedIngredients;
-    // console.log(ingredients);
+   
     fetchRecipe();
   }, [state.currentRecipe.extendedIngredients, data, dispatch, id]);
-
-  //why does this show an array in console but comes up as undef?
-
-  // const ingredients = state.currentRecipe.extendedIngredients.map(item => {
-  //     return item.name
-  // })
-  // console.log("currentRecipe:", state.currentRecipe);
 
   return (
     <div className="single-recipe-container mx-5 px-5 my-4">

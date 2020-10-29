@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { ADD_COMMENT } from '../../utils/mutations';
-import {QUERY_USER } from '../../utils/queries';
 import {useParams} from 'react-router-dom';
 
 

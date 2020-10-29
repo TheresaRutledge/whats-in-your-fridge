@@ -1,5 +1,5 @@
 // Spoonacular API calls
-const apiKey = "2ec16bc94c0d49fabeaf579afe65975a";
+const apiKey = "5bb17ff8de4a4ac48777208734e43797";
 
 // gets passed array of ingredients
 export const getRecipes = async (ingredients) => {

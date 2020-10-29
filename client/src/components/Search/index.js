@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { UPDATE_INGREDIENTS, UPDATE_RECIPES } from '../../utils/actions';
 import { useStoreContext } from '../../utils/State';
 import { getRecipes } from '../../utils/helpers';

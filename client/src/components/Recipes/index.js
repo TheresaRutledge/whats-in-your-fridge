@@ -4,7 +4,6 @@ import { ADD_FAVORITE, REMOVE_FAVORITES } from '../../utils/mutations';
 import { QUERY_USER } from '../../utils/queries';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import Auth from '../../utils/auth';
-import Profile from '../../pages/Profile';
 import 'bootstrap/dist/css/bootstrap.css';
 import Card from 'react-bootstrap/Card';
 import '../../index.css';

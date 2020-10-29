@@ -7,7 +7,6 @@ import { useQuery } from "@apollo/react-hooks";
 import Recipes from "../components/Recipes";
 import Container from "react-bootstrap/Container";
 import CardColumns from "react-bootstrap/CardColumns";
-import Card from "react-bootstrap/Card";
 
 const Profile = () => {
   const [state, dispatch] = useStoreContext();
@@ -15,7 +14,6 @@ const Profile = () => {
   const recipeIds = data ? data.me.favorites : "";
 
   useEffect(() => {
-    console.log("in use effect");
     async function fetchRecipes() {
       const recipes = await getFavorites(recipeIds).catch((err) =>
         console.log("Error", err)
@@ -31,7 +29,12 @@ const Profile = () => {
     if (recipeIds) {
       fetchRecipes();
     }
-  }, [recipeIds, dispatch, state.favoriteRecipes]);
+  }, [recipeIds, dispatch, state.favoriteRecipes,data]);
+
+
+  if(loading){
+    return<h2>LOADING...</h2>;
+  }
 
   return (
     <div>
