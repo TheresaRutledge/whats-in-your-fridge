@@ -20,7 +20,7 @@ const commentSchema = new Schema({
   createdAt: {
     type: Date,
     default: Date.now,
-    get: (timeStamp) => moment(timeStamp).format("MMM DD, YYYY [at] hh:mm a"),
+    get: (timeStamp) => moment(timeStamp).format("MMM DD, YYYY"),
   },
   username: {
     type: String,

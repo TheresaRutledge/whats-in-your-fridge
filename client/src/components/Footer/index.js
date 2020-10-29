@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <Navbar
       style={{ border: '2px solid' }}
-      className="w-100 mt-auto navbar navbar-light bg-light footer border-bottom-0 border-left-0 border-right-0"
+      className="w-100 mt-auto navbar navbar-light bg-light fixed-bottom footer border-bottom-0 border-left-0 border-right-0"
     >
       <div className="mx-5 main-footer" style={{ width: '100%' }}>
         <Row>
