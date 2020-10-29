@@ -9,30 +9,17 @@ const Footer = () => {
     >
       <div className="mx-5 main-footer" style={{ width: '100%' }}>
         <Row>
-          <Col xs="12" md="4" className="py-4 ">
+          <Col xs="12">
             <h6
-              class="text-uppercase font-weight-bold"
-              style={{ textAlign: 'center' }}
-            >
-              Location
-            </h6>
-            <p className="pb-0 mb-1" style={{ textAlign: 'center' }}>
-              97536 Stewart Estates
-            </p>
-            <p className="pb-0 mb-1" style={{ textAlign: 'center' }}>
-              Grimesport, IA 80749-6884
-            </p>
-            <p className="pb-0 mb-1" style={{ textAlign: 'center' }}>
-              United States of America
-            </p>
-          </Col>
-          <Col xs="12" md="4" className="py-4 ">
-            <h6
-              class="text-uppercase font-weight-bold"
+              className="text-uppercase font-weight-bold"
               style={{ textAlign: 'center' }}
             >
               Who We Are
             </h6>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs="12" md="4" className="py-2 ">
             <p className="pb-0 mb-1" style={{ textAlign: 'center' }}>
               <a
                 href="https://www.linkedin.com/in/theresarutledge/"
@@ -51,6 +38,8 @@ const Footer = () => {
                 Hani Ghaderi
               </a>
             </p>
+          </Col>
+          <Col xs="12" md="4" className="py-2 ">
             <p className="pb-0 mb-1" style={{ textAlign: 'center' }}>
               <a
                 href="https://www.linkedin.com/in/theresarutledge/"
@@ -70,24 +59,14 @@ const Footer = () => {
               </a>
             </p>
           </Col>
-          <Col xs="12" md="4" className="py-4 ">
-            <h6
-              class="text-uppercase font-weight-bold"
-              style={{ textAlign: 'center' }}
-            >
-              Contact Us!
-            </h6>
+          <Col xs="12" md="4" className="py-2 ">
             <p className="pb-0 mb-1" style={{ textAlign: 'center' }}>
               <a
-                href="mailto: WhatIsInYourFridge@gmail.com"
+                href="https://www.linkedin.com/in/ruohan-wang-78990590/"
+                target="_blank"
                 className="text-body"
               >
-                WhatIsInYourFridge@gmail.com
-              </a>
-            </p>
-            <p className="pb-0 mb-1" style={{ textAlign: 'center' }}>
-              <a href="tel:" className="text-body">
-                +1 (800) 567-8901
+                Rouhan Wang
               </a>
             </p>
           </Col>
