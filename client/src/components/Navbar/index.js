@@ -6,6 +6,10 @@ import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
 import SignUpForm from '../SignupForm';
 import LoginForm from '../LoginForm';
 
+import StripeCheckout from 'react-stripe-checkout';
+// recreating the `Stripe` object on every render.
+const stripeKey =
+  'pk_test_51HhCS7GO36rYcXmbjchTWLEOjxcgzEepOk8QhKuPZ0Oyx4X3uH4yXdYj5jpGSKQ1hUkb6yyzTOGTk8Mqmzpp7k7S00ouymSUty';
 const AppNavbar = () => {
   // set modal display state
   const [showModal, setShowModal] = useState(false);

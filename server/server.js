@@ -18,7 +18,6 @@ server.applyMiddleware({ app });
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-
 // Serve up static assets. TBD if static images will be used
 // app.use('/images', express.static(path.join(__dirname, '../client/images')));
 
@@ -35,5 +34,6 @@ db.once('open', () => {
   app.listen(PORT, () => {
     console.log(`API server running on port ${PORT}!`);
     console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
+    console.log(`Stripe API server running on port ${PORT}/StripeDonate !`);
   });
 });
