@@ -79,6 +79,10 @@ code {
 .footer {
   padding-bottom: 70px;
 }
+
+.fixed-bottom{
+  position:relative!
+}
 /* .search-title {
   color: 
 } */

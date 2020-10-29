@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <Navbar
       style={{ border: '2px solid' }}
-      className="w-100 mt-auto navbar navbar-light bg-light fixed-bottom footer border-bottom-0 border-left-0 border-right-0"
+      className="w-100 mt-auto navbar navbar-light bg-light footer border-bottom-0 border-left-0 border-right-0"
     >
       <div className="mx-5 main-footer" style={{ width: '100%' }}>
         <Row>
@@ -19,7 +19,7 @@ const Footer = () => {
           </Col>
         </Row>
         <Row>
-          <Col xs="12" md="4" className="py-2 ">
+          <Col xs="12" md="6" className="py-2 ">
             <p className="pb-0 mb-1" style={{ textAlign: 'center' }}>
               <a
                 href="https://www.linkedin.com/in/theresarutledge/"
@@ -39,7 +39,7 @@ const Footer = () => {
               </a>
             </p>
           </Col>
-          <Col xs="12" md="4" className="py-2 ">
+          <Col xs="12" md="6" className="py-2 ">
             <p className="pb-0 mb-1" style={{ textAlign: 'center' }}>
               <a
                 href="https://www.linkedin.com/in/theresarutledge/"
@@ -49,17 +49,6 @@ const Footer = () => {
                 Theresa Rutledge
               </a>
             </p>
-            <p className="pb-0 mb-1" style={{ textAlign: 'center' }}>
-              <a
-                href="https://www.linkedin.com/in/ruohan-wang-78990590/"
-                target="_blank"
-                className="text-body"
-              >
-                Rouhan Wang
-              </a>
-            </p>
-          </Col>
-          <Col xs="12" md="4" className="py-2 ">
             <p className="pb-0 mb-1" style={{ textAlign: 'center' }}>
               <a
                 href="https://www.linkedin.com/in/ruohan-wang-78990590/"
