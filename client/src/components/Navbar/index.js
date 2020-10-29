@@ -20,16 +20,16 @@ const AppNavbar = () => {
           <Navbar.Toggle aria-controls="navbar" />
           <Navbar.Collapse id="navbar">
             <Nav className="ml-auto">
-              <Nav.Link as={Link} to="/" className="donate">
+              {/* <Nav.Link as={Link} to="/" className="">
                 Don't let your food go to waste!
-              </Nav.Link>
+              </Nav.Link> */}
               <Nav.Link as={Link} to="/donate" className="donate">
                 Donation
               </Nav.Link>
               {/* if user is logged in show saved books and logout */}
               {Auth.loggedIn() ? (
                 <>
-                  <Nav.Link as={Link} to="/profile">
+                  <Nav.Link as={Link} to="/profile" className="favorites">
                     My Favorites
                   </Nav.Link>
                   <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
