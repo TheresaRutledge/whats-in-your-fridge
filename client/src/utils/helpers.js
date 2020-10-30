@@ -1,8 +1,8 @@
 require('dotenv').config();
 
 // Spoonacular API calls
-const apiKey = process.env.API_KEY;
-// console.log('apikey',apikey)
+// const apiKey = process.env.API_KEY;
+const apiKey = '5bb17ff8de4a4ac48777208734e43797'
 
 
 // gets passed array of ingredients
