@@ -19,16 +19,18 @@ const Footer = () => {
           </Col>
         </Row>
         <Row>
-          <Col xs="12" md="6" className="py-2 ">
+          <Col xs="12" md="3" className="py-2 ">
             <p className="pb-0 mb-1" style={{ textAlign: 'center' }}>
               <a
-                href="https://www.linkedin.com/in/theresarutledge/"
+                href="https://www.linkedin.com/in/alex-walker-b2984015/"
                 target="_blank"
                 className="text-body"
               >
                 Alex Walker
               </a>
             </p>
+          </Col>
+          <Col xs="12" md="3" className="py-2 ">
             <p className="pb-0 mb-1" style={{ textAlign: 'center' }}>
               <a
                 href="https://www.linkedin.com/in/theresarutledge/"
@@ -39,16 +41,18 @@ const Footer = () => {
               </a>
             </p>
           </Col>
-          <Col xs="12" md="6" className="py-2 ">
+          <Col xs="12" md="3" className="py-2 ">
             <p className="pb-0 mb-1" style={{ textAlign: 'center' }}>
               <a
-                href="https://www.linkedin.com/in/theresarutledge/"
+                href="https://www.linkedin.com/in/hani-ghaderi-956a83a/"
                 target="_blank"
                 className="text-body"
               >
                 Theresa Rutledge
               </a>
             </p>
+          </Col>
+          <Col xs="12" md="3" className="py-2 ">
             <p className="pb-0 mb-1" style={{ textAlign: 'center' }}>
               <a
                 href="https://www.linkedin.com/in/ruohan-wang-78990590/"
