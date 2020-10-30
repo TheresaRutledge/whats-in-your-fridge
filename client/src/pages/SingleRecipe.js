@@ -14,7 +14,7 @@ const SingleRecipe = () => {
   const [state, dispatch] = useStoreContext();
 
   const { id } = useParams();
-  const { loading, data } = useQuery(QUERY_COMMENTS, {
+  const { loading, data,refetch } = useQuery(QUERY_COMMENTS, {
     variables: { recipeId: id },
   });
   const comments = data ? data.commentByRecipeId : [];
@@ -37,6 +37,10 @@ const SingleRecipe = () => {
    
     fetchRecipe();
   }, [state.currentRecipe.extendedIngredients, data, dispatch, id]);
+
+  const reRender =()=>{
+    refetch();
+  }
 
   return (
     <div className="single-recipe-container mx-5 px-5 my-4">
@@ -62,7 +66,7 @@ const SingleRecipe = () => {
       </Row>
      
         {Auth.loggedIn() ? (
-          <CommentForm></CommentForm>
+          <CommentForm reRender={reRender} ></CommentForm>
         ) : (
           <p className="font-italic text-muted">Login to leave a comment</p>
         )}

@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { ADD_COMMENT } from '../../utils/mutations';
 import {useParams} from 'react-router-dom';
+import { QUERY_COMMENTS } from '../../utils/queries';
+import { idbPromise } from '../../utils/helpers';
 
 
-const CommentForm = () => {
+const CommentForm = ({reRender}) => {
     const {id} = useParams();
     const maxChar = 280;
-    const [addComment, { error }] = useMutation(ADD_COMMENT);
+    const [addComment, { error }] = useMutation(ADD_COMMENT)
 
     const [commentText, setText] = useState('');
     const [characterCount, setCharacterCount] = useState(0);
@@ -25,11 +27,13 @@ const CommentForm = () => {
             await addComment({
                 variables: { commentText, recipeId:id }
             });
+            idbPromise('comments','put',{commentText,recipeId:id})
             setText(' ');
             setCharacterCount(0);
         } catch (e) {
             console.error(e);
         }
+        reRender();
     }
 
     return (

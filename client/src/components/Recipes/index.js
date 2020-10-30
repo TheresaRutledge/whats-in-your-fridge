@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import { ADD_FAVORITE, REMOVE_FAVORITES } from '../../utils/mutations';
 import { QUERY_USER } from '../../utils/queries';
@@ -7,8 +7,9 @@ import Auth from '../../utils/auth';
 import 'bootstrap/dist/css/bootstrap.css';
 import Card from 'react-bootstrap/Card';
 import '../../index.css';
+import { idbPromise } from '../../utils/helpers';
 
-const Recipes = ({ recipe }) => {
+const Recipes = ({ recipe,reRender }) => {
   let missingIngredients;
   if (recipe.missedIngredients) {
     missingIngredients = recipe.missedIngredients.map((item) => {
@@ -16,28 +17,29 @@ const Recipes = ({ recipe }) => {
     });
   }
 
+  const { loading, data,refetch } = useQuery(QUERY_USER);
+  const favorites = data? data.me.favorites : [];
+  
+
+
+
   const [addFavorites] = useMutation(ADD_FAVORITE, {
     update(cache, { data: { addFavorites } }) {
-      const { me } = cache.readQuery({ query: QUERY_USER });
-      cache.writeQuery({
-        query: QUERY_USER,
-        data: { me: { ...me, favorites: [...me.favorites, addFavorites] } },
-      });
-    },
+      refetch();
+    }
+    
   });
 
   const [removeFavorites] = useMutation(REMOVE_FAVORITES, {
-    update(cache, { data: { removeFavorites } }) {
-      const { me } = cache.readQuery({ query: QUERY_USER });
-      cache.writeQuery({
-        query: QUERY_USER,
-        data: { me: { ...me, favorites: [...me.favorites, removeFavorites] } },
-      });
-    },
+    update(cache,{data:{removeFavorites}}){
+    refetch();
+    reRender();
+    }
   });
 
-  const { loading, data } = useQuery(QUERY_USER);
-  const favorites = data ? data.me.favorites : '';
+
+
+
 
   let checkIfFavorite = () => {
     for (let i = 0; i < favorites.length; i++) {
@@ -49,9 +51,6 @@ const Recipes = ({ recipe }) => {
   };
   let isFavorite = checkIfFavorite();
 
-  const toggleFavorite = () => {
-    isFavorite = !isFavorite;
-  };
 
   const updateFavorite = () => {
     if (isFavorite) {
@@ -59,14 +58,16 @@ const Recipes = ({ recipe }) => {
       removeFavorites({
         variables: { recipeId: recipe.id.toString() },
       });
+      idbPromise('favoriteRecipes','delete',[favorites, recipe.id.toString()])
     }
     if (!isFavorite) {
       console.log('adding ', recipe.id.toString());
       addFavorites({
         variables: { recipeId: recipe.id.toString() },
       });
+      idbPromise('favoriteRecipes','put',[...favorites,recipe.id.toString()])
     }
-    toggleFavorite();
+    
   };
 
   return (

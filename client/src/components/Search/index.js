@@ -1,7 +1,7 @@
 import React from 'react';
 import { UPDATE_INGREDIENTS, UPDATE_RECIPES } from '../../utils/actions';
 import { useStoreContext } from '../../utils/State';
-import { getRecipes } from '../../utils/helpers';
+import { getRecipes, idbPromise } from '../../utils/helpers';
 
 const Search = () => {
   const [state, dispatch] = useStoreContext();
@@ -24,8 +24,8 @@ const Search = () => {
           recipes: recipes,
         });
       })
-      .then((data) => {
-        console.log(state.recipes);
+      .then((recipes) => {
+        console.log(recipes)
       });
   };
 

@@ -10,8 +10,12 @@ import CardColumns from "react-bootstrap/CardColumns";
 
 const Profile = () => {
   const [state, dispatch] = useStoreContext();
-  const { loading, data } = useQuery(QUERY_USER);
-  const recipeIds = data ? data.me.favorites : "";
+  const { loading, data,refetch } = useQuery(QUERY_USER);
+  const recipeIds = data ? data.me.favorites : [];
+
+
+
+
 
   useEffect(() => {
     async function fetchRecipes() {
@@ -29,8 +33,12 @@ const Profile = () => {
     if (recipeIds) {
       fetchRecipes();
     }
+ 
   }, [recipeIds, dispatch, state.favoriteRecipes,data]);
 
+const reRender =() =>{
+  refetch();
+}
 
   if(loading){
     return<h2>LOADING...</h2>;
@@ -45,7 +53,7 @@ const Profile = () => {
             "Oops something went wrong"
           ) : recipeIds.length > 0 ? (
             state.favoriteRecipes.map((recipe) => (
-              <Recipes key={recipe.id} recipe={recipe} />
+              <Recipes key={recipe.id} recipe={recipe} reRender={reRender}/>
             ))
           ) : (
             <h4>You don't have any favorites yet!</h4>

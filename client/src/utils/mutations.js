@@ -56,6 +56,7 @@ export const ADD_FAVORITE = gql`
   mutation addFavorites($recipeId: String!) {
     addFavorites(recipeId: $recipeId) {
       _id
+      
     }
   }
 `;
