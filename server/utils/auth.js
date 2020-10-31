@@ -1,6 +1,8 @@
-require('dotenv').config();
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
 const jwt = require('jsonwebtoken');
 const secret = process.env.SECRET;
+console.log('SECRET', secret);
 
 const expiration = '2h';
 module.exports = {
