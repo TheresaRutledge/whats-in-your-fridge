@@ -1,19 +1,18 @@
-require('dotenv').config();
-
 // Spoonacular API calls
 // const apiKey = process.env.API_KEY;
-const apiKey = '5bb17ff8de4a4ac48777208734e43797'
-
+// const path = require('path');
+// require('dotenv').config({ path: path.resolve(__dirname, '../../../.env') });
+const apiKey = '9e4b01edc1f84fb5b4cdabf203555996';
 
 // gets passed array of ingredients
 export const getRecipes = async (ingredients) => {
   for (let i = 1; i < ingredients.length; i++) {
-    ingredients[i] = "+" + ingredients[i];
+    ingredients[i] = '+' + ingredients[i];
   }
-  const ingredientsString = ingredients.join(",");
+  const ingredientsString = ingredients.join(',');
 
   return await fetch(
-    `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredientsString}&number=10&ignorePatry=true&apiKey=${apiKey}`
+    `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredientsString}&number=10&ignorePatry=true&apiKey=${apiKey}`,
   )
     .then((response) => {
       return response.json();
@@ -26,7 +25,7 @@ export const getRecipes = async (ingredients) => {
 
 export const getSingleRecipe = async (id) => {
   return await fetch(
-    `https://api.spoonacular.com/recipes/${id}/information?includeNutrition=false&apiKey=${apiKey}`
+    `https://api.spoonacular.com/recipes/${id}/information?includeNutrition=false&apiKey=${apiKey}`,
   )
     .then((response) => {
       return response.json();
@@ -45,7 +44,7 @@ export const getFavorites = async (recipeIds) => {
   } else if (recipeIds.length === 0) {
     return false;
   } else {
-    recipeIdString = recipeIds.join(",");
+    recipeIdString = recipeIds.join(',');
   }
 
   // return {
@@ -54,7 +53,7 @@ export const getFavorites = async (recipeIds) => {
   // }
 
   return await fetch(
-    `https://api.spoonacular.com/recipes/informationBulk?ids=${recipeIdString}&includeNutrition=false&apiKey=${apiKey}`
+    `https://api.spoonacular.com/recipes/informationBulk?ids=${recipeIdString}&includeNutrition=false&apiKey=${apiKey}`,
   )
     .then((response) => {
       return response.json();
@@ -65,7 +64,6 @@ export const getFavorites = async (recipeIds) => {
     .catch((err) => console.log(err));
 };
 
-
 export function idbPromise(storeName, method, object) {
   return new Promise((resolve, reject) => {
     // open connection to the database `shop-shop` with the version of 1
@@ -74,12 +72,15 @@ export function idbPromise(storeName, method, object) {
     // create variables to hold reference to the database, transaction (tx), and object store
     let db, tx, store;
 
-    // if version has changed (or if this is the first time using the database), run this method and create the three object stores 
+    // if version has changed (or if this is the first time using the database), run this method and create the three object stores
     request.onupgradeneeded = function (e) {
       const db = request.result;
       // create object store for each type of data and set "primary" key index to be the `_id` of the data
-      db.createObjectStore('comments', { keyPath: 'key', autoIncrement:true });
-      db.createObjectStore('favoriteRecipes', { keyPath: 'key',autoIncrement:true });
+      db.createObjectStore('comments', { keyPath: 'key', autoIncrement: true });
+      db.createObjectStore('favoriteRecipes', {
+        keyPath: 'key',
+        autoIncrement: true,
+      });
       // db.createObjectStore('currentRecipe', { keyPath: '_id' });
     };
 
@@ -109,7 +110,7 @@ export function idbPromise(storeName, method, object) {
           break;
         case 'get':
           const all = store.getAll();
-          all.onsuccess = function() {
+          all.onsuccess = function () {
             resolve(all.result);
           };
           break;
@@ -126,6 +127,5 @@ export function idbPromise(storeName, method, object) {
         db.close();
       };
     };
-
   });
 }
