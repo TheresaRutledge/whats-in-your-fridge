@@ -41,7 +41,7 @@ MIT
 
 ## GitHub
 
-My GitHub link: (https://github.com/rhw-git/book-search-engine)
+My GitHub link: (https://github.com/TheresaRutledge/whats-in-your-fridge)
 
 ## Heroku
 
