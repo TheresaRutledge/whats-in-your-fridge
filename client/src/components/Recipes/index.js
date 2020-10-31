@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ADD_FAVORITE, REMOVE_FAVORITES } from '../../utils/mutations';
 import { QUERY_USER } from '../../utils/queries';
@@ -9,7 +9,7 @@ import Card from 'react-bootstrap/Card';
 import '../../index.css';
 import { idbPromise } from '../../utils/helpers';
 
-const Recipes = ({ recipe,reRender }) => {
+const Recipes = ({ recipe, reRender }) => {
   let missingIngredients;
   if (recipe.missedIngredients) {
     missingIngredients = recipe.missedIngredients.map((item) => {
@@ -17,29 +17,21 @@ const Recipes = ({ recipe,reRender }) => {
     });
   }
 
-  const { loading, data,refetch } = useQuery(QUERY_USER);
-  const favorites = data? data.me.favorites : [];
-  
-
-
+  const { loading, data, refetch } = useQuery(QUERY_USER);
+  const favorites = data ? data.me.favorites : [];
 
   const [addFavorites] = useMutation(ADD_FAVORITE, {
     update(cache, { data: { addFavorites } }) {
       refetch();
-    }
-    
+    },
   });
 
   const [removeFavorites] = useMutation(REMOVE_FAVORITES, {
-    update(cache,{data:{removeFavorites}}){
-    refetch();
-    reRender();
-    }
+    update(cache, { data: { removeFavorites } }) {
+      refetch();
+      reRender();
+    },
   });
-
-
-
-
 
   let checkIfFavorite = () => {
     for (let i = 0; i < favorites.length; i++) {
@@ -51,23 +43,27 @@ const Recipes = ({ recipe,reRender }) => {
   };
   let isFavorite = checkIfFavorite();
 
-
   const updateFavorite = () => {
     if (isFavorite) {
       console.log('removing ', recipe.id.toString());
       removeFavorites({
         variables: { recipeId: recipe.id.toString() },
       });
-      idbPromise('favoriteRecipes','delete',[favorites, recipe.id.toString()])
+      idbPromise('favoriteRecipes', 'delete', [
+        favorites,
+        recipe.id.toString(),
+      ]);
     }
     if (!isFavorite) {
       console.log('adding ', recipe.id.toString());
       addFavorites({
         variables: { recipeId: recipe.id.toString() },
       });
-      idbPromise('favoriteRecipes','put',[...favorites,recipe.id.toString()])
+      idbPromise('favoriteRecipes', 'put', [
+        ...favorites,
+        recipe.id.toString(),
+      ]);
     }
-    
   };
 
   return (
